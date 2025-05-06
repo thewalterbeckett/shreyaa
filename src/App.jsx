@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import Dna from "./Components/dna";
+import Dna from "./Components/Dna";
 
 function App() {
   const [curretlyOpen, setCurrentlyOpen] = useState(0);
