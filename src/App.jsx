@@ -30,6 +30,7 @@ function App() {
               ATGCGTACGTTAGCAGTACGATCGTAGCTAGTACGATGCTAGTGCTAGCTGACTGATCGTACGTAGCTAGCTAGTACGATCGTACGATCGTACGATGCATGCTAGTACGATGCTAGCTAGCTAGCGTACGATCGTAGCTAGCTGATCGTACGATGCTAGCGTACGATCGTACGATCGTACGAGTACGATGCTAGTACGATGCTAGTACGAGTACGTA
             </div>
           </div>
+          <div></div>
           <div>
             I'm a recent graduate from the University of Massachusetts, Dartmouth, with a deep interest in bioinformatics and computational
             biology. My expertise includes genomics, RNA-Seq analysis, and data handling, with a background in computer science that has
