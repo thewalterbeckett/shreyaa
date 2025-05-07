@@ -40,7 +40,7 @@ function App() {
     setIsContactOpen(true);
 
     gsap.to(contactFormMask.current, {
-      opacity: 1,
+      opacity: 0.8,
       duration: 1,
       ease: "power2.out",
       pointerEvents: "auto",
@@ -165,6 +165,7 @@ function App() {
               <div>Message</div>
               <textarea rows={5} />
             </div>
+            <button>Send</button>
           </div>
         </div>
         <div className="projectsContainer">
@@ -216,7 +217,7 @@ function App() {
           </div>
         </div>
         <div className="socialContainer">
-          <Links text="Email" link="https://www.linkedin.com/in/kirti-shreyaa/" />
+          <Links text="Email" link="mailto:kirtishreyaa2000@gmail.com" />
           <Links text="GitHub" link="https://github.com/KiShrey" />
           <Links text="LinkedIn" link="https://www.linkedin.com/in/kirti-shreyaa/" />
         </div>

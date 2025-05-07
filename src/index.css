@@ -256,6 +256,12 @@ textarea:focus {
   border: 2px solid var(--black);
 }
 
+button {
+  color: var(--secondary);
+  background-color: var(--blue);
+  border: none;
+}
+
 @media only screen and (max-width: 1024px) {
   .mainGridContainer {
     overflow: auto;
