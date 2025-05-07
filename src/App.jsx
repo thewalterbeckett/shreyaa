@@ -26,7 +26,7 @@ function App() {
       x: "0vw",
       y: "0vh",
       scale: 0,
-      duration: 2,
+      duration: 1,
       ease: "power2.out",
       opacity: 0,
       delay: 1,
@@ -36,6 +36,9 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const handleContactClick = () => {
     if (isContactOpen) return; // Do nothing if already open
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.style.overflow = "hidden";
 
     setIsContactOpen(true);
 
@@ -50,7 +53,7 @@ function App() {
 
   const closeContactForm = () => {
     setIsContactOpen(false);
-    console.log("called");
+    document.body.style.overflow = "";
 
     gsap.to(contactFormMask.current, {
       opacity: 0,
