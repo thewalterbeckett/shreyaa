@@ -1,8 +1,66 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import Dna from "./Components/Dna";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import Links from "./Components/Links";
+import Link from "./Components/Links";
 
 function App() {
+  gsap.registerPlugin(useGSAP);
+  const photoContainer = useRef();
+  const photoMask = useRef();
+  const contactFormMask = useRef();
+  const contactForm = useRef();
+
+  useGSAP(() => {
+    gsap.to(photoContainer.current, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      duration: 3,
+      ease: "power2.out",
+      delay: 1,
+    });
+    gsap.to(photoMask.current, {
+      x: "0vw",
+      y: "0vh",
+      scale: 0,
+      duration: 2,
+      ease: "power2.out",
+      opacity: 0,
+      delay: 1,
+    });
+  }, []);
+
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const handleContactClick = () => {
+    if (isContactOpen) return; // Do nothing if already open
+
+    setIsContactOpen(true);
+
+    gsap.to(contactFormMask.current, {
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out",
+      pointerEvents: "auto",
+    });
+    gsap.fromTo(contactForm.current, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "power2.out" });
+  };
+
+  const closeContactForm = () => {
+    setIsContactOpen(false);
+    console.log("called");
+
+    gsap.to(contactFormMask.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.in",
+      pointerEvents: "none",
+    });
+    gsap.to(contactForm.current, { scale: 0, opacity: 0, duration: 0.5, ease: "power2.in" });
+  };
+
   const [curretlyOpen, setCurrentlyOpen] = useState(0);
 
   return (
@@ -13,8 +71,8 @@ function App() {
             Kirti <b>Shreyaa</b>
           </span>
           <div>
-            <div>Projects</div>
-            <div>Contact</div>
+            <Link text="Projects" />
+            <Link text="Contact" onClick={handleContactClick} />
           </div>
         </header>
         <div className="titleContainer">
@@ -23,7 +81,12 @@ function App() {
             Focused on <b>omics data analysis and precision medicine in genomics</b>
           </span>
         </div>
-        <div className="photoContainer" style={{ backgroundImage: "url(https://picsum.photos/id/870/200/300?grayscale)" }}></div>
+        <div
+          className="photoContainer"
+          ref={photoContainer}
+          style={{ backgroundImage: "url(https://picsum.photos/id/870/600/900?grayscale)", transform: "translate(-10vw, 15vh) scale(1.5)" }}
+        ></div>
+        <div className="photoMask" ref={photoMask}></div>
         <div className="descriptionContainer">
           <div className="scrollText">
             <div className="scrollTextIn">
@@ -37,9 +100,72 @@ function App() {
             honed my skills in algorithms, database management, and memory optimization.
           </div>
         </div>
-        <div className="contactContainer">
-          <div>Curious about something?</div>
+        <div className="contactContainer" onClick={handleContactClick}>
+          <div className="contactContainerHeader">
+            <div>Curious about something?</div>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7 17L17 7M17 7H8M17 7V16"
+                  stroke="var(--blue)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
           <b>Contact me</b>
+          <div
+            className="contactFormMask"
+            ref={contactFormMask}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeContactForm();
+            }}
+          ></div>
+          <div className="contactForm" ref={contactForm} onClick={(e) => e.stopPropagation()}>
+            <div className="contactFormHeader">
+              <h4>Drop a message</h4>
+              <svg
+                width="32px"
+                height="32px"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeContactForm();
+                }}
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g fill="none" fill-rule="evenodd">
+                    <path d="m0 0h32v32h-32z"></path>
+                    <path
+                      d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm-2.8284271 11.7573593c-.3905243-.3905243-1.0236893-.3905243-1.4142136 0s-.3905243 1.0236893 0 1.4142136l2.8284271 2.8284271-2.8284271 2.8284271c-.3905243.3905243-.3905243 1.0236893 0 1.4142136s1.0236893.3905243 1.4142136 0l2.8284271-2.8284271 2.8284271 2.8284271c.3905243.3905243 1.0236893.3905243 1.4142136 0s.3905243-1.0236893 0-1.4142136l-2.8284271-2.8284271 2.8284271-2.8284271c.3905243-.3905243.3905243-1.0236893 0-1.4142136s-1.0236893-.3905243-1.4142136 0l-2.8284271 2.8284271z"
+                      fill="var(--blue)"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <div>Name</div>
+              <input type="text" />
+            </div>
+            <div>
+              <div>Email</div>
+              <input type="email" />
+            </div>
+            <div>
+              <div>Message</div>
+              <textarea rows={5} />
+            </div>
+          </div>
         </div>
         <div className="projectsContainer">
           <b>Research Paper</b>
@@ -90,9 +216,9 @@ function App() {
           </div>
         </div>
         <div className="socialContainer">
-          <div>Mail</div>
-          <div>LinkedIn</div>
-          <div>GitHub</div>
+          <Links text="Email" link="https://www.linkedin.com/in/kirti-shreyaa/" />
+          <Links text="GitHub" link="https://github.com/KiShrey" />
+          <Links text="LinkedIn" link="https://www.linkedin.com/in/kirti-shreyaa/" />
         </div>
       </div>
     </>
