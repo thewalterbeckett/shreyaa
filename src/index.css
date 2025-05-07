@@ -134,7 +134,7 @@ header > div {
   transition: all 0.3s ease-in-out;
 }
 
-.contactContainer:hover svg {
+.contactContainer:hover > .contactContainerHeader > svg {
   transform: translate(8px, -8px);
 }
 

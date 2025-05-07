@@ -35,9 +35,9 @@ function App() {
 
   const [isContactOpen, setIsContactOpen] = useState(false);
   const handleContactClick = () => {
-    if (isContactOpen) return; // Do nothing if already open
+    if (isContactOpen) return;
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
 
     setIsContactOpen(true);
@@ -142,6 +142,7 @@ function App() {
                   e.stopPropagation();
                   closeContactForm();
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
